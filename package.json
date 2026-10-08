@@ -1,0 +1,46 @@
+{
+  "name": "terracraft-artisanal-ceramics",
+  "version": "1.0.0",
+  "description": "Artisanal Ceramics E-Commerce Catalog & Data Foundation (Sprint 1 & Sprint 2)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "migrate": "node src/scripts/migrate.js",
+    "seed": "node src/scripts/seed.js",
+    "validate:db": "node src/scripts/validateDb.js",
+    "test": "jest --runInBand --detectOpenHandles --forceExit"
+  },
+  "keywords": [
+    "ecommerce",
+    "catalog",
+    "ceramics",
+    "postgresql",
+    "express",
+    "variants",
+    "skus",
+    "sprint1",
+    "sprint2"
+  ],
+  "author": "Kalpna Asnani (Roll No: 2k23/CSM/55)",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.6",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.23.1",
+    "pg-mem": "^3.0.14"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2",
+    "supertest": "^7.3.1"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "verbose": true,
+    "testTimeout": 10000
+  }
+}
