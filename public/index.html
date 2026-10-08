@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TerraCraft Artisanal Ceramics — Catalog Administration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-brand">
+      <div class="brand-logo">🏺</div>
+      <div class="brand-text">
+        <h1>TerraCraft</h1>
+        <span class="subtext">Artisanal Ceramics Catalog Engine</span>
+      </div>
+    </div>
+    <div class="nav-student-badge">
+      <span class="badge-label">Student:</span>
+      <strong>Kalpna Asnani</strong>
+      <span class="badge-roll">2k23/CSM/55</span>
+      <span class="badge-uni">Univ. of Sindh, Jamshoro</span>
+    </div>
+    <div class="nav-auth">
+      <div id="auth-status-bar" class="auth-pill unauthenticated">
+        <span class="status-dot"></span>
+        <span id="auth-user-label">Unauthenticated</span>
+      </div>
+      <button id="btn-login-modal" class="btn btn-primary btn-sm">Admin Login</button>
+      <button id="btn-logout" class="btn btn-outline btn-sm hidden">Logout</button>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <section class="hero-banner">
+      <div class="hero-content">
+        <h2>Sprint 1 &amp; Sprint 2 Catalog &amp; Data Foundation</h2>
+        <p>A domain-specialized ceramic stoneware e-commerce architecture enforcing variant-combination integrity (CAT-04), non-negative inventory constraints (CAT-05), and hierarchical taxonomy with cycle prevention (CAT-01).</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-val" id="stat-db-engine">PostgreSQL</span>
+          <span class="stat-lbl">Active Engine</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val" id="stat-cat-count">0</span>
+          <span class="stat-lbl">Categories</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val" id="stat-prod-count">0</span>
+          <span class="stat-lbl">Products</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val" id="stat-sku-count">0</span>
+          <span class="stat-lbl">Sellable SKUs</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nav Tabs -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-tab="tab-categories">📁 Category Hierarchy (CAT-01)</button>
+      <button class="tab-btn" data-tab="tab-products">🏺 Products &amp; Variants (CAT-02 &amp; 03)</button>
+      <button class="tab-btn" data-tab="tab-combination-logic">🧩 Variant Combination Engine (CAT-04)</button>
+      <button class="tab-btn" data-tab="tab-api-console">⚡ Live API Tester</button>
+      <button class="tab-btn" data-tab="tab-docs">📖 Architecture &amp; ERD</button>
+    </div>
+
+    <!-- Tab 1: Categories -->
+    <section id="tab-categories" class="tab-content active">
+      <div class="section-header">
+        <div>
+          <h3>Category Tree Architecture</h3>
+          <p class="section-desc">Self-referential recursive category model with unique URL slugs and automated cycle prevention.</p>
+        </div>
+        <button id="btn-refresh-categories" class="btn btn-secondary btn-sm">🔄 Refresh Tree</button>
+      </div>
+      <div id="category-tree-container" class="tree-container">
+        <div class="loader">Loading category hierarchy...</div>
+      </div>
+    </section>
+
+    <!-- Tab 2: Products -->
+    <section id="tab-products" class="tab-content">
+      <div class="section-header">
+        <div>
+          <h3>Product Catalog &amp; Inventory Foundation</h3>
+          <p class="section-desc">Products mapped to canonical categories with JSONB technical specifications (clay body, firing cone, food safety).</p>
+        </div>
+        <button id="btn-refresh-products" class="btn btn-secondary btn-sm">🔄 Refresh Products</button>
+      </div>
+      <div id="products-list-container" class="products-grid">
+        <div class="loader">Loading product records...</div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Combination Logic -->
+    <section id="tab-combination-logic" class="tab-content">
+      <div class="card info-box">
+        <h4>CAT-04 Variant Combination Integrity Rule</h4>
+        <p>In artisanal ceramics, variant dimensions (e.g. Vessel Size &times; Glaze Finish) do not form an unchecked Cartesian product. The system <strong>represents valid combinations only</strong>. An unavailable combination is never created as a fake or zero-stock SKU.</p>
+      </div>
+
+      <div class="matrix-card">
+        <h3>Live Combination Matrix: Solstice Handcrafted Ceramic Planter</h3>
+        <p class="sub-caption">Demonstrating materialized valid SKUs versus the intentionally unavailable <em>Small &times; Sage Gloss</em> combination.</p>
+
+        <table class="table-matrix">
+          <thead>
+            <tr>
+              <th>Glaze Finish \ Size</th>
+              <th>Small (6")</th>
+              <th>Medium (8")</th>
+              <th>Large (10")</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Matte Obsidian</strong></td>
+              <td><span class="badge badge-success">Available</span><br><code>TC-SOL-SM-OBS</code><br>Price: $34.00 | Stock: 15</td>
+              <td><span class="badge badge-success">Available</span><br><code>TC-SOL-MD-OBS</code><br>Price: $49.50 | Stock: 14</td>
+              <td><span class="badge badge-muted">Not Formulated</span></td>
+            </tr>
+            <tr>
+              <td><strong>Speckled Sand</strong></td>
+              <td><span class="badge badge-muted">Not Formulated</span></td>
+              <td><span class="badge badge-success">Available</span><br><code>TC-SOL-MD-SND</code><br>Price: $48.00 | Stock: 22</td>
+              <td><span class="badge badge-success">Available</span><br><code>TC-SOL-LG-SND</code><br>Price: $65.00 | Stock: 8</td>
+            </tr>
+            <tr class="highlight-row">
+              <td><strong>Sage Gloss</strong></td>
+              <td>
+                <span class="badge badge-danger">Intentionally Unavailable</span><br>
+                <small class="text-danger">Glaze runs heavily on small walls in Cone 10. NOT created in DB (CAT-04).</small>
+              </td>
+              <td><span class="badge badge-muted">Not Formulated</span></td>
+              <td><span class="badge badge-success">Available</span><br><code>TC-SOL-LG-SGE</code><br>Price: $68.00 | Stock: 12</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tab 4: API Console -->
+    <section id="tab-api-console" class="tab-content">
+      <div class="api-console-grid">
+        <div class="console-sidebar">
+          <h4>Sprint 2 Endpoints</h4>
+          <ul class="endpoint-list">
+            <li class="endpoint-item active" data-ep="GET /api/v1/health"><code>GET</code> /api/v1/health</li>
+            <li class="endpoint-item" data-ep="GET /api/v1/admin/categories"><code>GET</code> /api/v1/admin/categories</li>
+            <li class="endpoint-item" data-ep="POST /api/v1/admin/categories"><code>POST</code> /api/v1/admin/categories</li>
+            <li class="endpoint-item" data-ep="GET /api/v1/admin/products"><code>GET</code> /api/v1/admin/products</li>
+            <li class="endpoint-item" data-ep="GET /api/v1/admin/products/1"><code>GET</code> /api/v1/admin/products/1</li>
+            <li class="endpoint-item" data-ep="PATCH /api/v1/admin/skus/1"><code>PATCH</code> /api/v1/admin/skus/1</li>
+          </ul>
+        </div>
+        <div class="console-main">
+          <div class="request-bar">
+            <span id="req-method-badge" class="method-tag tag-get">GET</span>
+            <input type="text" id="req-url-input" class="input-url" value="/api/v1/health" readonly>
+            <button id="btn-execute-request" class="btn btn-primary">Send Request</button>
+          </div>
+          <div id="req-body-section" class="body-editor hidden">
+            <label>Request JSON Body:</label>
+            <textarea id="req-body-text" class="code-editor" rows="5"></textarea>
+          </div>
+          <div class="response-section">
+            <div class="response-header">
+              <span>Response:</span>
+              <span id="res-status-badge" class="status-code">Waiting</span>
+            </div>
+            <pre id="res-output-json" class="json-viewer">Click "Send Request" to invoke API</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 5: Docs -->
+    <section id="tab-docs" class="tab-content">
+      <div class="card">
+        <h3>Documentation Index</h3>
+        <p>Comprehensive design and implementation documents generated for university review:</p>
+        <ul class="docs-list">
+          <li><strong><code>/docs/PROJECT_DECISION.md</code></strong>: Complete justification of the TerraCraft project idea, domain selection, student details, persona definitions, and scope boundaries.</li>
+          <li><strong><code>/docs/SPRINT_1.md</code></strong>: Sprint 1 architecture manual containing persona, MVP feature matrix, tech stack trade-offs, and normalized Mermaid ERD.</li>
+          <li><strong><code>/docs/SPRINT_2.md</code></strong>: Sprint 2 catalog data foundation document with data dictionary, route contracts, answer to 7 business rules, test commands, and evidence.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- Login Modal -->
+  <div id="login-modal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Administrator Authentication</h3>
+        <button id="btn-close-modal" class="close-x">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-sub">Log in with seeded local demo credentials to obtain a signed JWT token.</p>
+        <div class="demo-quick-buttons">
+          <button id="btn-fill-admin" class="btn btn-outline btn-xs">⚡ Fill Admin Credentials</button>
+          <button id="btn-fill-customer" class="btn btn-outline btn-xs">⚡ Fill Customer Credentials</button>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="login-email" class="form-input" placeholder="admin@terracraft.local">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="login-password" class="form-input" placeholder="StudioAdmin2026!">
+        </div>
+        <div id="login-error-msg" class="alert-box alert-error hidden"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-submit-login" class="btn btn-primary">Sign In &amp; Acquire Token</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
